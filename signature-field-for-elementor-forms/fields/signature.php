@@ -31,14 +31,12 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 	 * @param Widget_Base $widget
 	 */
 	public function update_controls( $widget ) {
-		$check_pro = get_option( '_redmuber_item_1527');
 		$elementor = \ElementorPro\Plugin::elementor();
 		$control_data = $elementor->controls_manager->get_control_from_stack( $widget->get_unique_name(), 'form_fields' );
 		if ( is_wp_error( $control_data ) ) {
 			return;
 		}
-		if( $check_pro == "ok"){
-			$field_controls = [
+		$field_controls = [
 				'signature_width' => [
 					'name' => 'signature_width',
 					'label' => esc_html__( 'Width', "signature-field-for-elementor-forms"),
@@ -116,77 +114,6 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 					'tabs_wrapper' => 'form_fields_tabs',
 				],
 			];
-		}else {
-			$field_controls = [
-				'signature_width' => [
-					'name' => 'signature_width',
-					'label' => esc_html__( 'Width', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::NUMBER,
-					'default' => '400',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Width signature pad', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
-				],
-				'signature_height' => [
-					'name' => 'signature_height',
-					'label' => esc_html__( 'Height', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::NUMBER,
-					'default' => '200',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Height signature pad', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
-				],
-				'signature_background_pro' => [
-					'name' => 'signature_background_pro',
-					'label' => esc_html__( 'Background', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'content_classes' => 'pro_disable elementor-panel-alert elementor-panel-alert-info',
-					'raw' => esc_html__( 'Background signature pad ( Default = white Upgrade to pro to change it )', "signature-field-for-elementor-forms" ),
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
-				],
-				'signature_color_pro' => [
-					'name' => 'signature_color_pro',
-					'label' => esc_html__( 'Color', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'content_classes' => 'pro_disable elementor-panel-alert elementor-panel-alert-info',
-					'raw' => esc_html__( 'Pen color ( Default = black Upgrade to pro to change it )', "signature-field-for-elementor-forms" ),
-					'default' => '#000000',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Color signature', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
-				],
-				'signature_fullname_pro' => [
-					'name' => 'signature_fullname_pro',
-					'label' => esc_html__( 'Enter Full Name', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'content_classes' => 'pro_disable elementor-panel-alert elementor-panel-alert-info',
-					'raw' => esc_html__( 'Customer enters Name ( Upgrade to pro to enable )', "signature-field-for-elementor-forms" ),
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
-				],
-			];
-		}
 		$control_data['fields'] = $this->inject_field_controls( $control_data['fields'], $field_controls );
 		$widget->update_control( 'form_fields', $control_data );
 	}
