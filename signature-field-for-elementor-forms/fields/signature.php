@@ -37,83 +37,87 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 			return;
 		}
 		$field_controls = [
-				'signature_width' => [
-					'name' => 'signature_width',
-					'label' => esc_html__( 'Width', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::NUMBER,
-					'default' => '400',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Width signature pad', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
+			'signature_width' => [
+				'name' => 'signature_width',
+				'label' => esc_html__( 'Width', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => '400',
+				'condition' => [
+					'field_type' => $this->get_type(),
 				],
-				'signature_height' => [
-					'name' => 'signature_height',
-					'label' => esc_html__( 'Height', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::NUMBER,
-					'default' => '200',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Height signature pad', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
+				'description' => esc_html__( 'Width signature pad', "signature-field-for-elementor-forms"),
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
+			'signature_height' => [
+				'name' => 'signature_height',
+				'label' => esc_html__( 'Height', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => '200',
+				'condition' => [
+					'field_type' => $this->get_type(),
 				],
-				'signature_background' => [
-					'name' => 'signature_background',
-					'label' => esc_html__( 'Background', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::COLOR,
-					'default' => '#ffffff',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Background signature pad', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
+				'description' => esc_html__( 'Height signature pad', "signature-field-for-elementor-forms"),
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
+			'signature_background' => [
+				'name' => 'signature_background',
+				'label' => esc_html__( 'Background', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'content_classes' => 'pro_disable elementor-panel-alert elementor-panel-alert-info',
+				'raw' => esc_html__( 'Background signature pad ( Default = white Upgrade to pro to change it )', "signature-field-for-elementor-forms" ),
+				'condition' => [
+					'field_type' => $this->get_type(),
 				],
-				'signature_color' => [
-					'name' => 'signature_color',
-					'label' => esc_html__( 'Color', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::COLOR,
-					'default' => '#000000',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Color signature', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
+			'signature_color' => [
+				'name' => 'signature_color',
+				'label' => esc_html__( 'Color', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'content_classes' => 'pro_disable elementor-panel-alert elementor-panel-alert-info',
+				'raw' => esc_html__( 'Pen color ( Default = black Upgrade to pro to change it )', "signature-field-for-elementor-forms" ),
+				'default' => '#000000',
+				'condition' => [
+					'field_type' => $this->get_type(),
 				],
-				'signature_fullname' => [
-					'name' => 'signature_fullname',
-					'label' => esc_html__( 'Enter Full Name', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::SWITCHER,
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'description' => esc_html__( 'Customer enters Name', "signature-field-for-elementor-forms"),
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
+				'description' => esc_html__( 'Color signature', "signature-field-for-elementor-forms"),
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
+			'signature_fullname' => [
+				'name' => 'signature_fullname',
+				'label' => esc_html__( 'Enter Full Name', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'content_classes' => 'pro_disable elementor-panel-alert elementor-panel-alert-info',
+				'raw' => esc_html__( 'Customer enters Name ( Upgrade to pro to enable )', "signature-field-for-elementor-forms" ),
+				'condition' => [
+					'field_type' => $this->get_type(),
 				],
-				'signature_fullname_text' => [
-					'name' => 'signature_fullname_text',
-					'label' => esc_html__( 'Text Enter Full Name', "signature-field-for-elementor-forms"),
-					'type' => \Elementor\Controls_Manager::TEXT,
-					'default' => 'Enter Full Name',
-					'condition' => [
-						'field_type' => $this->get_type(),
-					],
-					'tab' => 'content',
-					'inner_tab' => 'form_fields_content_tab',
-					'tabs_wrapper' => 'form_fields_tabs',
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
+			'signature_fullname_text' => [
+				'name' => 'signature_fullname_text',
+				'label' => esc_html__( 'Text Enter Full Name', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => 'Enter Full Name',
+				'condition' => [
+					'field_type' => $this->get_type(),
+					'signature_fullname' => "yes"
 				],
-			];
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
+		];
 		$control_data['fields'] = $this->inject_field_controls( $control_data['fields'], $field_controls );
 		$widget->update_control( 'form_fields', $control_data );
 	}
