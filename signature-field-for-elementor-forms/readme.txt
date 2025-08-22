@@ -15,6 +15,8 @@ Elementor Form Signature field add-on makes it easy for users to sign your forms
 [youtube https://www.youtube.com/watch?v=93-hqCN7nCQ]
 
 **DEMO**: <https://demo.add-ons.org/demo-signature-field/>
+**Pro Version**: <https://add-ons.org/plugin/elementor-forms-signature-fields/>
+**Document**: <https://add-ons.org/document-elementor-forms-signature/>
 
 Elementor Form Signature field add-on makes it easy for users to sign your forms. Signatures can be captured and displayed in your emails and saved to your submitted form data be viewed in your backend.
 
@@ -35,9 +37,6 @@ It supports all modern browsers and touch based devices.
 * Add your full name at the end of the signature
 * 30-day money-back guarantee
 * 1-year support
-
-**Download Pro Version**: <https://add-ons.org/plugin/elementor-forms-signature-fields/>
-**Document**: <https://add-ons.org/document-elementor-forms-signature/>
 
 == Installation ==
 **Normal installation**
