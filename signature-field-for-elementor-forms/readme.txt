@@ -2,8 +2,8 @@
 Contributors: addonsorg
 Tags: Elementor Forms, Signature fields, Elementor Forms Signature, Signature form, Signature field
 Requires at least: 2.0
-Tested up to: 6.8
-Stable tag: 1.4.0
+Tested up to: 6.9
+Stable tag: 1.4.2
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,6 +31,7 @@ It supports all modern browsers and touch based devices.
 - **Conditional Logic support**: The field conditional Logic support
 - **Entry and print preview support**
 - **Pdf Support** You can add signature to pdf
+- **Email Attachment Support**: Automatically attach the signature image to the email sent via Elementor Forms.
 
 == Pro Version ==
 * Change background and color
@@ -54,6 +55,9 @@ It supports all modern browsers and touch based devices.
 3. Addmin view
 
 == Changelog ==
+= 1.4.2 =
+- Fixed: Small problem
+
 = 1.3.7 =
 - Fixed: URL upload
 

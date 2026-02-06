@@ -2,8 +2,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+use ElementorPro\Core\Utils\Collection;
 class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\Fields\Field_Base {
 	private $fixed_files_indices = false;
+	public $attachments_array = array();
 	public function get_type() {
 		return 'signature';
 	}
@@ -117,6 +119,18 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 				'inner_tab' => 'form_fields_content_tab',
 				'tabs_wrapper' => 'form_fields_tabs',
 			],
+			'atta_signature' => [
+				'name' => 'atta_signature',
+				'label' => esc_html__( 'Email Attachment', "signature-field-for-elementor-forms"),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'no',
+				'condition' => [
+					'field_type' => $this->get_type(),
+				],
+				'tab' => 'content',
+				'inner_tab' => 'form_fields_content_tab',
+				'tabs_wrapper' => 'form_fields_tabs',
+			],
 		];
 		$control_data['fields'] = $this->inject_field_controls( $control_data['fields'], $field_controls );
 		$widget->update_control( 'form_fields', $control_data );
@@ -127,7 +141,7 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 	 * @param Form $form
 	 */
 	public function render( $item, $item_index, $form ) {	
-		$form->add_render_attribute( 'input' . $item_index, 'class', 'elementor-upload-field-signature' );
+		$form->add_render_attribute( 'input' . $item_index, 'class', 'elementor-upload-field-signature elementor-upload-field-signature-'.$item["custom_id"] );
 		$form->add_render_attribute( 'input' . $item_index, 'type', 'hidden', true );		
 		$background   = ! empty( $item['signature_background'] ) ? $item['signature_background'] : '#ffffff';
 		$color   = ! empty( $item['signature_color'] ) ? $item['signature_color'] : '#000000';
@@ -150,7 +164,7 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 		$html_clear ="<div class='elementor_signature_clear'><img src='".SUPERADDONS_ELEMENTOR_SIGNATURE_PLUGIN_URL."lib/images/remove-icon.png' alt='' /></div>";
 		$html_container = sprintf("<div class='elementor-signature-container' style='width: %spx' >%s<div class='elementor-signature-field' %s style='width:%spx; height: %spx; background: %s'></div></div>",$width,$html_clear, $data_attr,$width,$height,$background );
 		$input = sprintf(
-			'<input style="display: none;" type="text" %s>',
+			'<input type="hidden" %s>',
 			$form->get_render_attribute_string('input' . $item_index )
 		); 
 		printf( "<div class='width-100'>%s %s %s</div>", $html_container,$html_name,$input); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -186,6 +200,8 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 				$record->set("fields",$fields);
 				$index = 0;
 				$value = $file_url;
+				$record->update_field( $id, 'value', $value );
+				$record->update_field( $id, 'raw_value', $file_upload );
 				$record->add_file( $id, $index,
 						[
 							'path' => $file_upload,
@@ -213,12 +229,43 @@ class Superaddons_Elementor_Signature_Field extends \ElementorPro\Modules\Forms\
 			$record->update_field( $id, 'value', implode( ' , ', $files_array['url'] ) );
 			$record->update_field( $id, 'raw_value', implode( ' , ', $files_array['path'] ) );
 		}
+		$settings = $record->get( 'form_settings' );
+		$attachments_array = $this->get_file_by_attachment_type( $settings['form_fields'], $record );
+		$this->attachments_array = $attachments_array;
+		add_filter( 'wp_mail', array($this,"wp_mail") );
 	}
 	public function __construct() {
 		parent::__construct();
 		add_action( 'elementor_pro/forms/process', [ $this, 'set_file_fields_values' ], 10, 2 );
 		add_action("wp_enqueue_scripts",array($this,"add_lib"),1000);
 		add_action( 'elementor/preview/init', array( $this, 'editor_preview_footer' ) );
+		add_action( 'elementor_pro/forms/new_record', [ $this, 'remove_wp_mail_filter' ], 5 );
+	}
+	public function remove_wp_mail_filter() {
+		$this->attachments_array = [];
+		remove_filter( 'wp_mail', [ $this, 'wp_mail' ] );
+	}
+	public function wp_mail( $args ) {
+		$old_attachments = $args['attachments'];
+		$args['attachments'] = array_merge( $this->attachments_array, $old_attachments );
+		return $args;
+	}
+	function get_file_by_attachment_type( $form_fields, $record, $type = "yes" ) {
+		return Collection::make( $form_fields )
+			->filter( function ( $field ) use ( $type ) {
+				if(isset($field['atta_signature']) && $field['atta_signature'] === $type){
+					return true;
+				}else{
+					return false;
+				}
+			} )
+			->map( function ( $field ) use ( $record ) {
+				$id = $field['custom_id'];
+				return $record->get( 'files' )[ $id ]['path'] ?? null;
+			} )
+			->filter()
+			->flatten()
+			->values();
 	}
 	function add_lib(){
 		wp_enqueue_script("elementor_signature_lib",SUPERADDONS_ELEMENTOR_SIGNATURE_PLUGIN_URL."lib/js/jquery.signature.js",array('jquery',"jquery-ui-core","jquery-ui-widget","jquery-ui-mouse"));

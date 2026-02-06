@@ -2,15 +2,14 @@
 /**
  * Plugin Name: Signature field for Elementor Forms
  * Description: Elementor Form Signature addon makes it easy for users to sign your forms.
- * Plugin URI: https://add-ons.org/plugin/gravity-forms-repeater-fields/
- * Version: 1.4.0
+ * Version: 1.4.2
  * Author: add-ons.org
  * Requires Plugins: elementor
  * Text Domain: signature-field-for-elementor-forms
  * Domain Path: /languages
  * Author URI: https://add-ons.org/
- * Elementor tested up to: 3.29
- * Elementor Pro tested up to: 3.29
+ * Elementor tested up to: 3.35
+ * Elementor Pro tested up to: 3.35
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 **/
