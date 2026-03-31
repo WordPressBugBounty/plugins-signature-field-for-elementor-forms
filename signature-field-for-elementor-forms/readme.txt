@@ -3,7 +3,7 @@ Contributors: addonsorg
 Tags: Elementor Forms, Signature fields, Elementor Forms Signature, Signature form, Signature field
 Requires at least: 2.0
 Tested up to: 6.9
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,6 +55,9 @@ It supports all modern browsers and touch based devices.
 3. Addmin view
 
 == Changelog ==
+= 1.4.3 =
+- Removed: jquery-touch-punch
+
 = 1.4.2 =
 - Fixed: Small problem
 
