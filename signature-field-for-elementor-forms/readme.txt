@@ -2,7 +2,7 @@
 Contributors: addonsorg
 Tags: Elementor Forms, Signature fields, Elementor Forms Signature, Signature form, Signature field
 Requires at least: 2.0
-Tested up to: 6.9
+Tested up to: 7.1
 Stable tag: 1.4.3
 Requires PHP: 5.2
 License: GPLv2 or later
